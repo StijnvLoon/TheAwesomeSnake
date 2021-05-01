@@ -1,10 +1,73 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { Grid } from 'src/model/Grid';
+import { Direction, Game } from '../model/Game';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  title = 'TheAwesomeSnake';
+export class AppComponent implements OnInit {
+
+  isPlaying: boolean = false
+  delay = 1000
+  timer: number = 0
+  game: Game
+
+  constructor() {
+
+  }
+
+  togglePlaying() {
+    this.isPlaying = !this.isPlaying
+    if (this.isPlaying) {
+      this.loop()
+    }
+  }
+
+  loop() {
+    setTimeout(() => {
+
+      this.game.turn()
+      this.timer = this.timer + 1
+
+      if (this.isPlaying) {
+        this.loop()
+      }
+    }, this.delay)
+  }
+
+
+  @HostListener('window:keydown', ['$event'])
+  keyEvent(event: KeyboardEvent) {
+    switch(event.keyCode) {
+      case 37: {
+        this.game.direction = Direction.LEFT
+        break
+      }
+      case 38: {
+        this.game.direction = Direction.UP
+        break
+      }
+      case 39: {
+        this.game.direction = Direction.RIGHT
+        break
+      }
+      case 40: {
+        this.game.direction = Direction.DOWN
+        break
+      }
+    }
+  }
+
+  ngOnInit() {
+    this.createNewGame()
+    this.togglePlaying()
+  }
+
+  createNewGame() {
+    this.game = new Game(
+      new Grid(20, 20)
+    )
+  }
 }
