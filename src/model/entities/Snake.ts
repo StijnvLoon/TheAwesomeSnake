@@ -5,7 +5,7 @@ export class Snake extends Entity {
 
     constructor(
         public currentCell: Cell,
-        private turnsLeft: number
+        public turnsLeft: number
     ) {
         super(currentCell, EntityType.SNAKE)
     }

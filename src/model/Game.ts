@@ -1,23 +1,26 @@
 import { Grid } from "./Grid";
 import { Snake } from './entities/Snake';
+import { Apple } from './entities/Apple';
+import { Cell, CellListener } from "./Cell";
 
-export class Game {
+export class Game implements CellListener {
 
+    public grid: Grid
     public direction: Direction = Direction.RIGHT
     public snakes: Snake[]
     public snakeHead: Snake
     public points: number = 1
 
-    constructor(
-        public grid: Grid
-    ) {
+    constructor() {
+        this.grid = new Grid(20, 20, this)
         this.snakes = []
-        this.createSnake(5, 4)
+        this.createSnake(this.grid.getCellAt(5, 4))
+        this.createApple()
     }
 
-    createSnake(y: number, x: number) {
+    createSnake(cell: Cell) {
         const snake: Snake = new Snake(
-            this.grid.getCellAt(y, x,), 
+            cell, 
             this.points
         )
         snake.listener = {
@@ -34,28 +37,51 @@ export class Game {
         this.snakeHead = snake
     }
 
+    createApple() {
+        const apple: Apple = new Apple(this.grid.getRandomCell())
+        apple.listener = {
+            onKilled: () => {
+                delete apple.currentCell.entity
+            }
+        }
+    }
+
     turn() {
+        let nextCell: Cell
+
         switch(this.direction) {
             case Direction.UP: {
-                this.createSnake(this.snakeHead.currentCell.y - 1, this.snakeHead.currentCell.x)
+                nextCell = this.grid.getCellAt(this.snakeHead.currentCell.y - 1, this.snakeHead.currentCell.x)
                 break
             }
             case Direction.RIGHT: {
-                this.createSnake(this.snakeHead.currentCell.y, this.snakeHead.currentCell.x + 1)
+                nextCell = this.grid.getCellAt(this.snakeHead.currentCell.y, this.snakeHead.currentCell.x + 1)
                 break
             }
             case Direction.DOWN: {
-                this.createSnake(this.snakeHead.currentCell.y + 1, this.snakeHead.currentCell.x)
+                nextCell = this.grid.getCellAt(this.snakeHead.currentCell.y + 1, this.snakeHead.currentCell.x)
                 break
             }
             case Direction.LEFT: {
-                this.createSnake(this.snakeHead.currentCell.y, this.snakeHead.currentCell.x - 1)
+                nextCell = this.grid.getCellAt(this.snakeHead.currentCell.y , this.snakeHead.currentCell.x - 1)
                 break
             }
         }
+        nextCell.interact()
+
+        this.createSnake(nextCell)
 
         this.snakes.forEach((snake) => {
             snake.progress()
+        })
+    }
+
+    onAppleEaten() {
+        this.points = this.points + 1
+        this.createApple()
+
+        this.snakes.forEach((snake) => {
+            snake.turnsLeft = snake.turnsLeft + 1
         })
     }
 }

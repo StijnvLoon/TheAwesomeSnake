@@ -10,7 +10,7 @@ import { Direction, Game } from '../model/Game';
 export class AppComponent implements OnInit {
 
   isPlaying: boolean = false
-  delay = 1000
+  delay = 500
   timer: number = 0
   game: Game
 
@@ -66,8 +66,6 @@ export class AppComponent implements OnInit {
   }
 
   createNewGame() {
-    this.game = new Game(
-      new Grid(20, 20)
-    )
+    this.game = new Game()
   }
 }

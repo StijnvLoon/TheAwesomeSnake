@@ -21,6 +21,8 @@ export class CellComponent implements OnInit {
       switch (this.cell.entity.type) {
         case EntityType.SNAKE:
           return { 'background-color': 'green' }
+        case EntityType.APPLE:
+          return { 'background-color': 'red' }
         default:
           return {}
       }
