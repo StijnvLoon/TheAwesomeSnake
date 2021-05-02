@@ -6,8 +6,8 @@ import { Cell, CellListener } from "./Cell";
 export class Game implements CellListener {
 
     public isPlaying: boolean = false
-    public delay = 400
-    public timer: number = 0
+    public delay = 700
+    public turns: number = 0
 
     public grid: Grid
     public direction: Direction = Direction.RIGHT
@@ -20,6 +20,13 @@ export class Game implements CellListener {
         this.snakes = []
         this.createSnake(this.grid.getCellAt(5, 4))
         this.createApple()
+        this.createApple()
+        this.createApple()
+        this.createApple()
+        this.createApple()
+        this.createApple()
+        this.createApple()
+        
     }
 
     createSnake(cell: Cell) {
@@ -67,14 +74,13 @@ export class Game implements CellListener {
 
     loop() {
         setTimeout(() => {
-
             this.turn()
-            this.timer = this.timer + 1
+            this.turns = this.turns + 1
 
             if (this.isPlaying) {
                 this.loop()
             }
-        }, this.delay)
+        }, this.delay - (this.points * 15))
     }
 
     turn() {
@@ -122,7 +128,7 @@ export class Game implements CellListener {
 
     onGameLost() {
         this.togglePlaying()
-        alert('Lost')
+        alert('Lost, points: ' + this.points)
     }
 }
 

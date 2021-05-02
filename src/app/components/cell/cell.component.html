@@ -1,4 +1,5 @@
 <div class="cell" (click)="log()">
-    <div class="entity" *ngIf="cell.entity" [ngStyle]="getEntityStyle()"
-    [class.anim_apple_eat]="getAnimTrigger() == 0"></div>
+    <div *ngIf="cell.entity && cell.entity.type == 0" class="entity ant" [@snakeAnim] [ngStyle]="getEntityStyle()" [class.anim_apple_eat]="getAnimTrigger() == 0"></div>
+    <div *ngIf="cell.entity && cell.entity.type == 1" class="entity apple" [@appleAnim] [ngStyle]="getEntityStyle()"></div>
+    <div *ngIf="cell.entity && cell.entity.type == 2" class="entity blockade" [ngStyle]="getEntityStyle()"></div>
 </div>
