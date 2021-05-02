@@ -1,4 +1,3 @@
-import { Snake } from "./entities/Snake";
 import { Entity, EntityType } from "./Entity";
 
 export class Cell {
@@ -13,9 +12,21 @@ export class Cell {
 
     interact() {
         if(this.entity) {
-            if(this.entity.type == EntityType.APPLE) {
-                this.entity.kill()
-                this.listener.onAppleEaten()
+
+            switch(this.entity.type) {
+                case EntityType.APPLE: {
+                    this.entity.kill()
+                    this.listener.onAppleEaten()
+                    break
+                }
+                case EntityType.BLOCKADE: {
+                    this.listener.onGameLost()
+                    break
+                }
+                case EntityType.SNAKE: {
+                    this.listener.onGameLost()
+                    break
+                }
             }
         }
     }
@@ -23,4 +34,5 @@ export class Cell {
 
 export interface CellListener {
     onAppleEaten()
+    onGameLost()
 }

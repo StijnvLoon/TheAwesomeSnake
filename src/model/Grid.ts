@@ -1,4 +1,5 @@
 import { Cell, CellListener } from './Cell';
+import { Blockade } from './entities/Blockade';
 
 export class Grid {
 
@@ -13,6 +14,36 @@ export class Grid {
         for (var y = 0; y < height; y++) {
             for (var x = 0; x < width; x++) {
                 this.cellsMap.set(y + '-' + x, new Cell(y, x, cellEventListener))
+            }
+        }
+
+        //render borders
+        //top
+        for (var x = 0; x < width; x++) {
+            const cell = this.getCellAt(0, x)
+            if(!cell.entity) {
+                new Blockade(cell)
+            }
+        }
+        //bottom
+        for (var x = 0; x < width; x++) {
+            const cell = this.getCellAt(height-1, x)
+            if(!cell.entity) {
+                new Blockade(cell)
+            }
+        }
+        //left
+        for (var y = 1; y < height-1; y++) {
+            const cell = this.getCellAt(y, 0)
+            if(!cell.entity) {
+                new Blockade(cell)
+            }
+        }
+        //right
+        for (var y = 1; y < height-1; y++) {
+            const cell = this.getCellAt(y, width-1)
+            if(!cell.entity) {
+                new Blockade(cell)
             }
         }
     }

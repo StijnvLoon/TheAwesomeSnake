@@ -23,5 +23,6 @@ export interface EntityListener {
 
 export enum EntityType {
     SNAKE,
-    APPLE
+    APPLE,
+    BLOCKADE
 }

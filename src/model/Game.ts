@@ -5,6 +5,10 @@ import { Cell, CellListener } from "./Cell";
 
 export class Game implements CellListener {
 
+    public isPlaying: boolean = false
+    public delay = 400
+    public timer: number = 0
+
     public grid: Grid
     public direction: Direction = Direction.RIGHT
     public snakes: Snake[]
@@ -20,7 +24,7 @@ export class Game implements CellListener {
 
     createSnake(cell: Cell) {
         const snake: Snake = new Snake(
-            cell, 
+            cell,
             this.points
         )
         snake.listener = {
@@ -36,11 +40,11 @@ export class Game implements CellListener {
 
         this.snakes.push(snake)
 
-        if(this.snakeHead) {
+        if (this.snakeHead) {
             snake.snakeBody = this.grid.getCellAt(
                 this.snakeHead.currentCell.y,
                 this.snakeHead.currentCell.x
-                ).entity as Snake
+            ).entity as Snake
         }
         this.snakeHead = snake
     }
@@ -54,10 +58,29 @@ export class Game implements CellListener {
         }
     }
 
+    togglePlaying() {
+        this.isPlaying = !this.isPlaying
+        if (this.isPlaying) {
+            this.loop()
+        }
+    }
+
+    loop() {
+        setTimeout(() => {
+
+            this.turn()
+            this.timer = this.timer + 1
+
+            if (this.isPlaying) {
+                this.loop()
+            }
+        }, this.delay)
+    }
+
     turn() {
         let nextCell: Cell
 
-        switch(this.direction) {
+        switch (this.direction) {
             case Direction.UP: {
                 nextCell = this.grid.getCellAt(this.snakeHead.currentCell.y - 1, this.snakeHead.currentCell.x)
                 break
@@ -71,17 +94,19 @@ export class Game implements CellListener {
                 break
             }
             case Direction.LEFT: {
-                nextCell = this.grid.getCellAt(this.snakeHead.currentCell.y , this.snakeHead.currentCell.x - 1)
+                nextCell = this.grid.getCellAt(this.snakeHead.currentCell.y, this.snakeHead.currentCell.x - 1)
                 break
             }
         }
         nextCell.interact()
 
-        this.createSnake(nextCell)
+        if(this.isPlaying) {
+            this.createSnake(nextCell)
 
-        this.snakes.forEach((snake) => {
-            snake.progress()
-        })
+            this.snakes.forEach((snake) => {
+                snake.progress()
+            })
+        }
     }
 
     onAppleEaten() {
@@ -93,6 +118,11 @@ export class Game implements CellListener {
         })
 
         this.snakeHead.triggerAnim(SnakeAnim.APPLE_EATEN, 200)
+    }
+
+    onGameLost() {
+        this.togglePlaying()
+        alert('Lost')
     }
 }
 

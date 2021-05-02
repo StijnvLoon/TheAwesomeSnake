@@ -9,34 +9,11 @@ import { Direction, Game } from '../model/Game';
 })
 export class AppComponent implements OnInit {
 
-  isPlaying: boolean = false
-  delay = 400
-  timer: number = 0
   game: Game
 
   constructor() {
 
   }
-
-  togglePlaying() {
-    this.isPlaying = !this.isPlaying
-    if (this.isPlaying) {
-      this.loop()
-    }
-  }
-
-  loop() {
-    setTimeout(() => {
-
-      this.game.turn()
-      this.timer = this.timer + 1
-
-      if (this.isPlaying) {
-        this.loop()
-      }
-    }, this.delay)
-  }
-
 
   @HostListener('window:keydown', ['$event'])
   keyEvent(event: KeyboardEvent) {
@@ -62,7 +39,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.createNewGame()
-    this.togglePlaying()
+    this.game.togglePlaying()
   }
 
   createNewGame() {
