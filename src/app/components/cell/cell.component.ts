@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Cell } from 'src/model/Cell';
+import { Snake, SnakeAnim } from 'src/model/entities/Snake';
 import { EntityType } from 'src/model/Entity';
 
 @Component({
@@ -20,7 +21,7 @@ export class CellComponent implements OnInit {
     if (this.cell.entity) {
       switch (this.cell.entity.type) {
         case EntityType.SNAKE:
-          return { 'background-color': 'green' }
+          return { 'background-color': '#00BE00' }
         case EntityType.APPLE:
           return { 'background-color': 'red' }
         default:
@@ -29,6 +30,24 @@ export class CellComponent implements OnInit {
     } else {
       return {}
     }
+  }
+
+  getAnimTrigger(): number {
+    if(this.cell.entity) {
+      if(this.cell.entity.type == EntityType.SNAKE) {
+        const snake: Snake = this.cell.entity as Snake
+  
+        switch(snake.animTrigger) {
+          case SnakeAnim.APPLE_EATEN: {
+            return 0
+          }
+          default: {
+            return -1
+          }
+        }
+      }
+    }
+    return -1
   }
 
   log() {

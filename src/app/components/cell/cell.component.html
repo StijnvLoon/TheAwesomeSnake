@@ -1,3 +1,4 @@
 <div class="cell" (click)="log()">
-    <div class="entity" [ngStyle]="getEntityStyle()"></div>
+    <div class="entity" *ngIf="cell.entity" [ngStyle]="getEntityStyle()"
+    [class.anim_apple_eat]="getAnimTrigger() == 0"></div>
 </div>

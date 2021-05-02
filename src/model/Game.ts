@@ -1,5 +1,5 @@
 import { Grid } from "./Grid";
-import { Snake } from './entities/Snake';
+import { Snake, SnakeAnim } from './entities/Snake';
 import { Apple } from './entities/Apple';
 import { Cell, CellListener } from "./Cell";
 
@@ -27,6 +27,7 @@ export class Game implements CellListener {
             onKilled: () => {
                 const index: number = this.snakes.indexOf(snake)
 
+                delete snake.snakeBody
                 delete snake.currentCell.entity
                 delete this.snakes[index]
                 this.snakes.splice(index, 1)
@@ -34,11 +35,18 @@ export class Game implements CellListener {
         }
 
         this.snakes.push(snake)
+
+        if(this.snakeHead) {
+            snake.snakeBody = this.grid.getCellAt(
+                this.snakeHead.currentCell.y,
+                this.snakeHead.currentCell.x
+                ).entity as Snake
+        }
         this.snakeHead = snake
     }
 
     createApple() {
-        const apple: Apple = new Apple(this.grid.getRandomCell())
+        const apple: Apple = new Apple(this.grid.getRandomEmptyCell())
         apple.listener = {
             onKilled: () => {
                 delete apple.currentCell.entity
@@ -83,6 +91,8 @@ export class Game implements CellListener {
         this.snakes.forEach((snake) => {
             snake.turnsLeft = snake.turnsLeft + 1
         })
+
+        this.snakeHead.triggerAnim(SnakeAnim.APPLE_EATEN, 200)
     }
 }
 

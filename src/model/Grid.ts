@@ -28,6 +28,19 @@ export class Grid {
         return this.getCellAt(randomY, randomX)
     }
 
+    public getRandomEmptyCell(): Cell {
+        var cell: Cell
+
+        while (true) {
+            cell = this.getRandomCell()
+            if(cell.entity == undefined) {
+                break
+            }
+        }
+
+        return cell
+    }
+
     public randomRange(min, max) : number {
         return Math.floor(Math.random() * (max - min + 1) + min);
     }

@@ -14,7 +14,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: all 0.5 ease;
 }
-.food {
-    color: white;
+.anim_apple_eat {
+    animation: apple_eaten 0.3s ease 0s 1;
+}
+
+@keyframes apple_eaten {
+    // 0% { transform: scale(1.0);}
+    // 50% { transform: scale(0.8);}
+    // 100% { transform: scale(1.0);}
+    0% { background-color: #0d5806;}
+    100% { background-color: #00BE00;}
 }
