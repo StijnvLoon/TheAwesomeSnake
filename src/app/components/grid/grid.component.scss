@@ -1,7 +1,5 @@
 .container {
     width: 100%;
-    padding-left: 5%;
-    padding-right: 5%;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
@@ -13,6 +11,11 @@
     width: 100vh;
     background-color: rgb(255, 255, 255);
     border: 1px solid black;
+    padding: unset !important;
+}
+.tile {
+    padding-top: calc((5% - 0px) * 1 + 1px) !important;
+    width: calc((5% - 0px) * 1 + 1px) !important;
 }
 
 @keyframes rotate {

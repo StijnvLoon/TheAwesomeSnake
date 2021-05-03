@@ -1,4 +1,4 @@
-import { Grid } from "./Grid";
+import { Grid, GridAnim } from "./Grid";
 import { Snake, SnakeAnim } from './entities/Snake';
 import { Apple } from './entities/Apple';
 import { Cell, CellListener } from "./Cell";
@@ -26,7 +26,6 @@ export class Game implements CellListener {
         this.createApple()
         this.createApple()
         this.createApple()
-        
     }
 
     createSnake(cell: Cell) {
@@ -124,6 +123,26 @@ export class Game implements CellListener {
         })
 
         this.snakeHead.triggerAnim(SnakeAnim.APPLE_EATEN, 200)
+
+        if(this.points == 5) {
+            this.anim(GridAnim.SHRINK)
+        }
+
+        if(this.points == 8) {
+            this.anim(GridAnim.GOLEFT)
+        }
+
+        if(this.points == 10) {
+            this.anim(GridAnim.GORIGHT)
+        }
+    }
+
+    anim(anim: GridAnim) {
+        this.togglePlaying()
+        this.grid.triggerAnim(anim)
+        setTimeout(() => {
+            this.togglePlaying()
+        }, 3000);
     }
 
     onGameLost() {

@@ -4,11 +4,12 @@ import { Blockade } from './entities/Blockade';
 export class Grid {
 
     public cellsMap: Map<string, Cell>
+    public gridAnim: GridAnim
 
     constructor(
         public readonly width: number,
         public readonly height: number,
-        private cellEventListener: CellListener
+        cellEventListener: CellListener
     ) {
         this.cellsMap = new Map()
         for (var y = 0; y < height; y++) {
@@ -75,4 +76,20 @@ export class Grid {
     public randomRange(min, max) : number {
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
+
+    public triggerAnim(gridAnim: GridAnim) {
+        this.gridAnim = undefined
+
+        setTimeout(() => {
+            this.gridAnim = gridAnim
+        }, 5);
+    }
+}
+
+export enum GridAnim {
+    ROTATE180,
+    INVERT_COLORS,
+    SHRINK,
+    GOLEFT,
+    GORIGHT
 }

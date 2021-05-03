@@ -17,21 +17,32 @@ export class AppComponent implements OnInit {
 
   @HostListener('window:keydown', ['$event'])
   keyEvent(event: KeyboardEvent) {
+    //cant go in opposite direction
     switch(event.keyCode) {
       case 37: {
-        this.game.direction = Direction.LEFT
+        if(this.game.direction !== Direction.RIGHT) {
+          this.game.direction = Direction.LEFT
+        }
+
         break
       }
       case 38: {
-        this.game.direction = Direction.UP
+        if(this.game.direction !== Direction.DOWN) {
+          this.game.direction = Direction.UP
+        }
+
         break
       }
       case 39: {
-        this.game.direction = Direction.RIGHT
+        if(this.game.direction !== Direction.LEFT) {
+          this.game.direction = Direction.RIGHT
+        }
         break
       }
       case 40: {
-        this.game.direction = Direction.DOWN
+        if(this.game.direction !== Direction.UP) {
+          this.game.direction = Direction.DOWN
+        }
         break
       }
     }
