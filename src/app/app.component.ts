@@ -9,12 +9,25 @@ import { GridAnimEvent } from '../model/Event'
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
   level: Level
 
-  constructor() {
-
+  start() {
+    this.level = new Level(
+      40,
+      8,
+      700,
+      15,
+      new Map([
+        // [5, new GridAnimEvent(GridAnim.ROTATE180, 3000)],
+        // [10, new GridAnimEvent(GridAnim.DEFAULT, 3000)],
+        // [15, new GridAnimEvent(GridAnim.INVERT_COLORS, 1000)],
+        // [20, new GridAnimEvent(GridAnim.GOLEFT, 3000)],
+        // [25, new GridAnimEvent(GridAnim.DEFAULT, 1500)],
+      ])
+    )
+    this.level.start()
   }
 
   @HostListener('window:keydown', ['$event'])
@@ -48,26 +61,5 @@ export class AppComponent implements OnInit {
         break
       }
     }
-  }
-
-  ngOnInit() {
-    this.createNewGame()
-    this.level.start()
-  }
-
-  createNewGame() {
-    this.level = new Level(
-      40,
-      8,
-      700,
-      15,
-      new Map([
-        [5, new GridAnimEvent(GridAnim.ROTATE180, 3000)],
-        [10, new GridAnimEvent(GridAnim.DEFAULT, 3000)],
-        [15, new GridAnimEvent(GridAnim.INVERT_COLORS, 1000)],
-        [20, new GridAnimEvent(GridAnim.GOLEFT, 3000)],
-        [25, new GridAnimEvent(GridAnim.DEFAULT, 1500)],
-      ])
-    )
   }
 }

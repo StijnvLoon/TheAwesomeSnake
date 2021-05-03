@@ -1,0 +1,22 @@
+.buttons_holder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.data_holder {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+.data {
+    background-color: white;
+    padding: 5px;
+    border-radius: 8px;
+    border: solid 1px black;
+    display: flex;
+}

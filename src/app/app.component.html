@@ -1,1 +1,13 @@
+<div class="data_holder" *ngIf="level">
+    <div class="data">
+        <span>
+            Score: {{level.game.points}}
+        </span>
+    </div>
+</div>
+
 <app-grid [grid]="level.game.grid" *ngIf="level"></app-grid>
+
+<div class="buttons_holder" *ngIf="!level">
+    <button (click)="start()">Play</button>
+</div>

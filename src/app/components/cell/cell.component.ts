@@ -40,26 +40,13 @@ export class CellComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getEntityStyle() {
-    if (this.cell.entity) {
-      switch (this.cell.entity.type) {
-        case EntityType.SNAKE:
-          const snake = this.cell.entity as Snake
+  getAntStyle(): object {
+    const snake = this.cell.entity as Snake
 
-          if(snake.isHead) {
-            return { 'background-color': '#0f640f' }
-          }
-          return { 'background-color': '#00BE00' }
-        case EntityType.APPLE:
-          return { 'background-color': 'red' }
-        case EntityType.BLOCKADE:
-          return { 'background-color': 'black' }
-        default:
-          return {}
-      }
-    } else {
-      return {}
+    if(snake.isHead) {
+      return { 'background-color': '#0f640f' }
     }
+    return { 'background-color': '#00BE00' }
   }
 
   getAnimTrigger(): number {

@@ -1,5 +1,8 @@
 <div class="cell" (click)="log()">
-    <div *ngIf="cell.entity && cell.entity.type == 0" class="entity ant" [@snakeAnim] [ngStyle]="getEntityStyle()" [class.anim_apple_eat]="getAnimTrigger() == 0"></div>
-    <div *ngIf="cell.entity && cell.entity.type == 1" class="entity apple" [@appleAnim] [ngStyle]="getEntityStyle()"></div>
-    <div *ngIf="cell.entity && cell.entity.type == 2" class="entity blockade" [ngStyle]="getEntityStyle()"></div>
+    <div *ngIf="cell.entity && cell.entity.type == 0" class="entity ant" [@snakeAnim] [ngStyle]="getAntStyle()"
+        [class.anim_apple_eat]="getAnimTrigger() == 0"></div>
+    <div *ngIf="cell.entity && cell.entity.type == 1" class="entity apple" [@appleAnim]>
+        <img style="height: inherit; transform: scale(0.95);" src="../../../assets/Apple_logo_red.svg">
+    </div>
+    <div *ngIf="cell.entity && cell.entity.type == 2" class="entity blockade"></div>
 </div>
