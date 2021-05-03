@@ -1,21 +1,20 @@
-import { Cell } from '../Cell';
 import { Entity, EntityType } from '../Entity';
 
 export class Snake extends Entity {
 
     public snakeBody: Snake
     public animTrigger: SnakeAnim
+    public isHead: boolean
 
     constructor(
-        public currentCell: Cell,
         public turnsLeft: number
     ) {
-        super(currentCell, EntityType.SNAKE)
+        super(EntityType.SNAKE)
+        this.isHead = true
     }
 
     progress() {
         this.turnsLeft = this.turnsLeft - 1
-
         if(this.turnsLeft == 0) {
             this.kill()
         }

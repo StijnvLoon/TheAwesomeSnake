@@ -1,51 +1,39 @@
-import { Cell, CellListener } from './Cell';
+import { Cell } from './Cell';
 import { Blockade } from './entities/Blockade';
+import { GridAnimEvent } from './Event';
 
 export class Grid {
 
     public cellsMap: Map<string, Cell>
-    public gridAnim: GridAnim
+    public gridAnimEvent: GridAnimEvent
 
     constructor(
         public readonly width: number,
         public readonly height: number,
-        cellEventListener: CellListener
     ) {
         this.cellsMap = new Map()
         for (var y = 0; y < height; y++) {
             for (var x = 0; x < width; x++) {
-                this.cellsMap.set(y + '-' + x, new Cell(y, x, cellEventListener))
+                this.cellsMap.set(y + '-' + x, new Cell(y, x))
             }
         }
 
         //render borders
         //top
         for (var x = 0; x < width; x++) {
-            const cell = this.getCellAt(0, x)
-            if(!cell.entity) {
-                new Blockade(cell)
-            }
+            this.getCellAt(0, x).interact(new Blockade())
         }
         //bottom
         for (var x = 0; x < width; x++) {
-            const cell = this.getCellAt(height-1, x)
-            if(!cell.entity) {
-                new Blockade(cell)
-            }
+            this.getCellAt(height-1, x).interact(new Blockade())
         }
         //left
         for (var y = 1; y < height-1; y++) {
-            const cell = this.getCellAt(y, 0)
-            if(!cell.entity) {
-                new Blockade(cell)
-            }
+            this.getCellAt(y, 0).interact(new Blockade())
         }
         //right
         for (var y = 1; y < height-1; y++) {
-            const cell = this.getCellAt(y, width-1)
-            if(!cell.entity) {
-                new Blockade(cell)
-            }
+            this.getCellAt(y, width-1).interact(new Blockade())
         }
     }
 
@@ -77,16 +65,18 @@ export class Grid {
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
 
-    public triggerAnim(gridAnim: GridAnim) {
-        this.gridAnim = undefined
+    public playGridAnimEvent(gridAnimEvent: GridAnimEvent) {
+        this.gridAnimEvent = gridAnimEvent
+        // this.gridAnimEvent = undefined
 
-        setTimeout(() => {
-            this.gridAnim = gridAnim
-        }, 5);
+        // setTimeout(() => {
+        //     this.gridAnimEvent = gridAnimEvent
+        // }, 5);
     }
 }
 
 export enum GridAnim {
+    DEFAULT,
     ROTATE180,
     INVERT_COLORS,
     SHRINK,

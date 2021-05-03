@@ -1,18 +1,17 @@
 import { Cell } from "./Cell";
 
 export class Entity {
+
+    public currentCell: Cell
     
     constructor(
-        public currentCell: Cell,
         public type: EntityType,
-        public listener?: EntityListener
-    ) {
-        currentCell.entity = this
-    }
+        public entityListener?: EntityListener
+    ) { }
 
     kill() {
-        if(this.listener) {
-            this.listener.onKilled()
+        if(this.entityListener) {
+            this.entityListener.onKilled()
         }
     }
 }

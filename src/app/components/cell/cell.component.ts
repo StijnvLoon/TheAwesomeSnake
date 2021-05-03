@@ -44,6 +44,11 @@ export class CellComponent implements OnInit {
     if (this.cell.entity) {
       switch (this.cell.entity.type) {
         case EntityType.SNAKE:
+          const snake = this.cell.entity as Snake
+
+          if(snake.isHead) {
+            return { 'background-color': '#0f640f' }
+          }
           return { 'background-color': '#00BE00' }
         case EntityType.APPLE:
           return { 'background-color': 'red' }
@@ -64,7 +69,10 @@ export class CellComponent implements OnInit {
 
         switch (snake.animTrigger) {
           case SnakeAnim.APPLE_EATEN: {
-            return 0
+            if(!snake.isHead) {
+              return 0
+            }
+            return -1
           }
           default: {
             return -1
