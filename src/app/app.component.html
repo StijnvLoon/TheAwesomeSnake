@@ -9,5 +9,16 @@
 <app-grid [grid]="level.game.grid" *ngIf="level"></app-grid>
 
 <div class="buttons_holder" *ngIf="!level">
-    <button (click)="start()">Play</button>
+    <div class="menu_button" (click)="start(classic)">
+        Classic
+        <div class="menu_button_line"></div>
+    </div>
+    <div class="menu_button" (click)="start(fast)">
+        Fast
+        <div class="menu_button_line"></div>
+    </div>
+    <div class="menu_button" (click)="start(chaos)">
+        Chaos
+        <div class="menu_button_line"></div>
+    </div>
 </div>

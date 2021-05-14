@@ -11,22 +11,38 @@ import { GridAnimEvent } from '../model/Event'
 })
 export class AppComponent {
 
+  classic: Level = new Level(
+    100,
+    1,
+    700,
+    15,
+    new Map()
+  )
+  fast: Level = new Level(
+    100,
+    10,
+    700,
+    20,
+    new Map()
+  )
+  chaos: Level = new Level(
+    100,
+    1,
+    700,
+    15,
+    new Map([
+      [10, new GridAnimEvent(GridAnim.ROTATE180, 3000)],
+      [15, new GridAnimEvent(GridAnim.DEFAULT, 3000)],
+      [20, new GridAnimEvent(GridAnim.INVERT_COLORS, 1000)],
+      [30, new GridAnimEvent(GridAnim.GOLEFT, 3000)],
+      [45, new GridAnimEvent(GridAnim.DEFAULT, 1500)],
+    ])
+  )
+
   level: Level
 
-  start() {
-    this.level = new Level(
-      40,
-      8,
-      700,
-      15,
-      new Map([
-        // [5, new GridAnimEvent(GridAnim.ROTATE180, 3000)],
-        // [10, new GridAnimEvent(GridAnim.DEFAULT, 3000)],
-        // [15, new GridAnimEvent(GridAnim.INVERT_COLORS, 1000)],
-        // [20, new GridAnimEvent(GridAnim.GOLEFT, 3000)],
-        // [25, new GridAnimEvent(GridAnim.DEFAULT, 1500)],
-      ])
-    )
+  start(level: Level) {
+    this.level = level
     this.level.start()
   }
 
