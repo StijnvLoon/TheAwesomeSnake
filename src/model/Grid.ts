@@ -67,11 +67,74 @@ export class Grid {
 
     public playGridAnimEvent(gridAnimEvent: GridAnimEvent) {
         this.gridAnimEvent = gridAnimEvent
-        // this.gridAnimEvent = undefined
+    }
 
-        // setTimeout(() => {
-        //     this.gridAnimEvent = gridAnimEvent
-        // }, 5);
+    display3() {
+        this.cleanBoard()
+
+        this.getCellAt(9, 8).showBoard = true
+        this.getCellAt(9, 9).showBoard = true
+        this.getCellAt(9, 10).showBoard = true
+        this.getCellAt(8, 11).showBoard = true
+        this.getCellAt(7, 11).showBoard = true
+        this.getCellAt(6, 11).showBoard = true
+        this.getCellAt(5, 10).showBoard = true
+        this.getCellAt(5, 9).showBoard = true
+        this.getCellAt(5, 8).showBoard = true
+        this.getCellAt(6, 7).showBoard = true
+        this.getCellAt(10, 11).showBoard = true
+        this.getCellAt(11, 11).showBoard = true
+        this.getCellAt(12, 11).showBoard = true
+        this.getCellAt(13, 10).showBoard = true
+        this.getCellAt(13, 9).showBoard = true
+        this.getCellAt(13, 8).showBoard = true
+        this.getCellAt(12, 7).showBoard = true
+    }
+
+    display2() {
+        this.cleanBoard()
+
+        this.getCellAt(6, 7).showBoard = true
+        this.getCellAt(5, 8).showBoard = true
+        this.getCellAt(5, 9).showBoard = true
+        this.getCellAt(5, 10).showBoard = true
+        this.getCellAt(6, 11).showBoard = true
+        this.getCellAt(7, 11).showBoard = true
+        this.getCellAt(8, 11).showBoard = true
+        this.getCellAt(9, 10).showBoard = true
+        this.getCellAt(10, 9).showBoard = true
+        this.getCellAt(11, 8).showBoard = true
+        this.getCellAt(12, 7).showBoard = true
+        this.getCellAt(13, 7).showBoard = true
+        this.getCellAt(13, 8).showBoard = true
+        this.getCellAt(13, 9).showBoard = true
+        this.getCellAt(13, 10).showBoard = true
+        this.getCellAt(13, 11).showBoard = true
+    }
+
+    display1() {
+        this.cleanBoard()
+
+        this.getCellAt(5, 9).showBoard = true
+        this.getCellAt(6, 8).showBoard = true
+        this.getCellAt(6, 9).showBoard = true
+        this.getCellAt(7, 9).showBoard = true
+        this.getCellAt(8, 9).showBoard = true
+        this.getCellAt(9, 9).showBoard = true
+        this.getCellAt(10, 9).showBoard = true
+        this.getCellAt(11, 9).showBoard = true
+        this.getCellAt(12, 9).showBoard = true
+        this.getCellAt(13, 8).showBoard = true
+        this.getCellAt(13, 9).showBoard = true
+        this.getCellAt(13, 10).showBoard = true
+    }
+
+    cleanBoard() {
+        Array.from(this.cellsMap.values()).forEach((cell) => {
+            if(cell.showBoard) {
+                cell.showBoard = false
+            }
+        })
     }
 }
 

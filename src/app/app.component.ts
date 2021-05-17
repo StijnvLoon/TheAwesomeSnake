@@ -27,15 +27,15 @@ export class AppComponent {
   )
   chaos: Level = new Level(
     100,
-    1,
+    3,
     700,
     15,
     new Map([
-      [10, new GridAnimEvent(GridAnim.ROTATE180, 3000)],
-      [15, new GridAnimEvent(GridAnim.DEFAULT, 3000)],
-      [20, new GridAnimEvent(GridAnim.INVERT_COLORS, 1000)],
-      [30, new GridAnimEvent(GridAnim.GOLEFT, 3000)],
-      [45, new GridAnimEvent(GridAnim.DEFAULT, 1500)],
+      [20, new GridAnimEvent(GridAnim.ROTATE180, 3000)],
+      [35, new GridAnimEvent(GridAnim.DEFAULT, 3000)],
+      [50, new GridAnimEvent(GridAnim.INVERT_COLORS, 1000)],
+      [65, new GridAnimEvent(GridAnim.GOLEFT, 3000)],
+      [75, new GridAnimEvent(GridAnim.DEFAULT, 1500)],
     ])
   )
 
@@ -43,7 +43,9 @@ export class AppComponent {
 
   start(level: Level) {
     this.level = level
-    this.level.start()
+    this.level.game.countdown(() => {
+      this.level.start()
+    })
   }
 
   @HostListener('window:keydown', ['$event'])

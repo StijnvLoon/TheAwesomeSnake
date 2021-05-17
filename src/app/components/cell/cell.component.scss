@@ -20,6 +20,12 @@
 .blockade {
     background-color: black;
 }
+.board {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(46, 44, 163, 0.801);
+}
 
 @keyframes apple_eaten {
     0% { background-color: #00BE00;}

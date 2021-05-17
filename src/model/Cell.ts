@@ -6,6 +6,7 @@ import { Entity, EntityType } from "./Entity";
 export class Cell {
 
     public entity: Entity
+    public showBoard: boolean = false
 
     constructor(
         public readonly y: number,

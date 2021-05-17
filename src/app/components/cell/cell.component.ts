@@ -9,8 +9,7 @@ import { EntityType } from 'src/model/Entity';
   templateUrl: './cell.component.html',
   styleUrls: ['./cell.component.scss'],
   animations: [
-    trigger(
-      'snakeAnim', [
+    trigger('snakeAnim', [
       transition(':enter', [
         style({ transform: 'scale(0.5)', opacity: 0 }),
         animate('250ms cubic-bezier(0.16, 1, 0.3, 1)', style({ transform: 'scale(1.0)', opacity: 1 }))
@@ -19,16 +18,23 @@ import { EntityType } from 'src/model/Entity';
         style({ transform: 'scale(1)', opacity: 1 }),
         animate('250ms ease-out', style({ transform: 'scale(0.5)', opacity: 0 }))
       ])
-    ]
-    ),
-    trigger(
-      'appleAnim', [
+    ]),
+    trigger('appleAnim', [
       transition(':enter', [
         style({ transform: 'scale(0.5) rotate(360deg)', opacity: 0 }),
         animate('500ms ease-out', style({ transform: 'scale(1.0) rotate(0deg)', opacity: 1 }))
       ])
-    ]
-    )
+    ]),
+    trigger('boardAnim', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('250ms', style({ opacity: 1 }))
+      ]),
+      transition(':leave', [
+        style({ opacity: 1 }),
+        animate('250ms', style({ opacity: 0 }))
+      ])
+    ]),
   ],
 })
 export class CellComponent implements OnInit {
@@ -40,10 +46,10 @@ export class CellComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getAntStyle(): object {
+  getSnakeStyle(): object {
     const snake = this.cell.entity as Snake
 
-    if(snake.isHead) {
+    if (snake.isHead) {
       return { 'background-color': '#0f640f' }
     }
     return { 'background-color': '#00BE00' }
@@ -56,7 +62,7 @@ export class CellComponent implements OnInit {
 
         switch (snake.animTrigger) {
           case SnakeAnim.APPLE_EATEN: {
-            if(!snake.isHead) {
+            if (!snake.isHead) {
               return 0
             }
             return -1
@@ -71,6 +77,14 @@ export class CellComponent implements OnInit {
   }
 
   log() {
+    // if(this.cell.entity) {
+    //   if(this.cell.entity.type == EntityType.BOARD) {
+    //     this.cell.entity = undefined
+    //   }
+    // } else {
+    //   this.cell.interact(new Board())
+    // }
+
     console.log(this.cell)
   }
 }

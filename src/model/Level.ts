@@ -12,7 +12,7 @@ export class Level implements ProgressHandler {
         apples: number,
         private startSpeed: number,
         private speedDecreasePerPoint: number,
-        //on what turn the event takes place
+        //on what turn the events takes place
         private eventsMap: Map<number, IEvent>
     ) {
         this.game = new Game(this, targetPoints, apples)

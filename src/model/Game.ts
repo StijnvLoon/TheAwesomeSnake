@@ -115,16 +115,32 @@ export class Game {
     private playEvent(event: IEvent) {
         this.progressHandler.pause()
 
-        switch (event.getEventType()) {
-            case EventType.GRIDANIM: {
-                const gridAnimEvent = event as GridAnimEvent
-
-                this.grid.playGridAnimEvent(gridAnimEvent)
-                setTimeout(() => {
-                    this.progressHandler.start()
-                }, gridAnimEvent.duration);
+        this.countdown(() => {
+            switch (event.getEventType()) {
+                case EventType.GRIDANIM: {
+                    const gridAnimEvent = event as GridAnimEvent
+    
+                    this.grid.playGridAnimEvent(gridAnimEvent)
+                    setTimeout(() => {
+                        this.progressHandler.start()
+                    }, gridAnimEvent.duration);
+                }
             }
-        }
+        })
+    }
+
+    countdown(action: () => void) {
+        this.grid.display3()
+        setTimeout(() => {
+            this.grid.display2()
+        }, 1000);
+        setTimeout(() => {
+            this.grid.display1()
+        }, 2000);
+        setTimeout(() => {
+            this.grid.cleanBoard()
+            action()
+        }, 3000);
     }
 
     onAppleEaten() {
