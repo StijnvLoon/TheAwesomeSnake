@@ -13,7 +13,8 @@ export class Level implements ProgressHandler {
         private startSpeed: number,
         private speedDecreasePerPoint: number,
         //on what turn the events takes place
-        private eventsMap: Map<number, IEvent>
+        private eventsMap: Map<number, IEvent>,
+        private listener: LevelListener
     ) {
         this.game = new Game(this, targetPoints, apples)
     }
@@ -30,11 +31,7 @@ export class Level implements ProgressHandler {
     finish(won: boolean, points: number) {
         this.isPlaying = false
 
-        if(won) {
-            alert('Gewonnen!')
-        } else {
-            alert('Verloren, punten: ' + points)
-        }
+        this.listener.onLevelEnded(won, points)
     }
 
     private loop() {
@@ -53,4 +50,8 @@ export interface ProgressHandler {
     start()
     pause()
     finish(won: boolean, points: number)
+}
+
+export interface LevelListener {
+    onLevelEnded(won: boolean, points: number)
 }

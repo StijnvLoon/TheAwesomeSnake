@@ -1,3 +1,4 @@
+import { LevelListener } from './../model/Level';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Grid, GridAnim } from 'src/model/Grid';
 import { Level } from 'src/model/Level';
@@ -9,21 +10,23 @@ import { GridAnimEvent } from '../model/Event'
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements LevelListener {
 
   classic: Level = new Level(
     100,
     1,
     700,
     15,
-    new Map()
+    new Map(),
+    this
   )
   fast: Level = new Level(
     100,
     10,
     700,
     20,
-    new Map()
+    new Map(),
+    this
   )
   chaos: Level = new Level(
     100,
@@ -36,7 +39,8 @@ export class AppComponent {
       [50, new GridAnimEvent(GridAnim.INVERT_COLORS, 1000)],
       [65, new GridAnimEvent(GridAnim.GOLEFT, 3000)],
       [75, new GridAnimEvent(GridAnim.DEFAULT, 1500)],
-    ])
+    ]),
+    this
   )
 
   level: Level
@@ -46,6 +50,10 @@ export class AppComponent {
     this.level.game.countdown(() => {
       this.level.start()
     })
+  }
+
+  onLevelEnded(won: boolean, points: number) {
+    this.level = undefined
   }
 
   @HostListener('window:keydown', ['$event'])
