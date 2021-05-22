@@ -3,7 +3,8 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Grid, GridAnim } from 'src/model/Grid';
 import { Level } from 'src/model/Level';
 import { Direction, Game } from '../model/Game';
-import { GridAnimEvent } from '../model/Event'
+import { GridAnimEvent } from '../model/Event';
+import { ProgressService } from './services/progress.service';
 
 @Component({
   selector: 'app-root',
@@ -45,6 +46,8 @@ export class AppComponent implements LevelListener {
 
   level: Level
 
+  constructor(public progressService: ProgressService) { }
+
   start(level: Level) {
     this.level = level
     this.level.game.countdown(() => {
@@ -54,6 +57,10 @@ export class AppComponent implements LevelListener {
 
   onLevelEnded(won: boolean, points: number) {
     this.level = undefined
+
+    if(won) {
+      this.progressService.increaseProgress()
+    }
   }
 
   @HostListener('window:keydown', ['$event'])

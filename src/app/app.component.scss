@@ -41,3 +41,7 @@
     background-color: black;
     transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
+.menu_button_disabled {
+    pointer-events: none;
+    filter: opacity(0.4);
+}

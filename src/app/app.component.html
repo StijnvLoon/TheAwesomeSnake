@@ -10,15 +10,15 @@
 
 <div class="buttons_holder" *ngIf="!level">
     <div class="menu_button" (click)="start(classic)">
-        Classic
+        Level 1
         <div class="menu_button_line"></div>
     </div>
-    <div class="menu_button" (click)="start(fast)">
-        Fast
+    <div class="menu_button" (click)="start(fast)" [class.menu_button_disabled]="progressService.progress < 1">
+        Level 2
         <div class="menu_button_line"></div>
     </div>
-    <div class="menu_button" (click)="start(chaos)">
-        Chaos
+    <div class="menu_button" (click)="start(chaos)" [class.menu_button_disabled]="progressService.progress < 2">
+        Level 3
         <div class="menu_button_line"></div>
     </div>
 </div>
