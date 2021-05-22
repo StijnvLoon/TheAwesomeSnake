@@ -15,7 +15,7 @@ export class Game {
 
     constructor(
         private progressHandler: ProgressHandler,
-        private targetPoints: number,
+        public targetPoints: number,
         appleAmount: number
     ) {
         this.grid = new Grid(20, 20)

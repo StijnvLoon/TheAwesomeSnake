@@ -37,12 +37,22 @@ export class Level implements ProgressHandler {
     private loop() {
         setTimeout(() => {
             this.turns = this.turns + 1
-            this.game.turn(this.eventsMap.get(this.turns))
+            this.game.turn(this.getNextEvent(this.game.points))
 
             if (this.isPlaying) {
                 this.loop()
             }
         }, this.game.calculateLoopSpeed(this.startSpeed, this.speedDecreasePerPoint))
+    }
+
+    private getNextEvent(points: number): IEvent {
+        //get event that is registered with the points
+        //remove the event from the list
+        //return event
+        const event: IEvent = this.eventsMap.get(points)
+        this.eventsMap.delete(points)
+
+        return event
     }
 }
 
