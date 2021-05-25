@@ -1,4 +1,5 @@
 import { Entity, EntityType } from '../Entity';
+import { Direction } from '../Game';
 
 export class Snake extends Entity {
 
@@ -7,7 +8,8 @@ export class Snake extends Entity {
     public isHead: boolean
 
     constructor(
-        public turnsLeft: number
+        public turnsLeft: number,
+        public directionCreated: Direction
     ) {
         super(EntityType.SNAKE)
         this.isHead = true

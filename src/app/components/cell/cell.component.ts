@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Cell } from 'src/model/Cell';
 import { Snake, SnakeAnim } from 'src/model/entities/Snake';
 import { EntityType } from 'src/model/Entity';
+import { Direction } from 'src/model/Game';
 
 @Component({
   selector: 'app-cell',
@@ -10,10 +11,10 @@ import { EntityType } from 'src/model/Entity';
   styleUrls: ['./cell.component.scss'],
   animations: [
     trigger('snakeAnim', [
-      transition(':enter', [
-        style({ transform: 'scale(0.5)', opacity: 0 }),
-        animate('250ms cubic-bezier(0.16, 1, 0.3, 1)', style({ transform: 'scale(1.0)', opacity: 1 }))
-      ]),
+      // transition(':enter', [
+      //   style({ transform: 'scale(0.5)', opacity: 0 }),
+      //   animate('250ms cubic-bezier(0.16, 1, 0.3, 1)', style({ transform: 'scale(1.0)', opacity: 1 }))
+      // ]),
       transition(':leave', [
         style({ transform: 'scale(1)', opacity: 1 }),
         animate('250ms ease-out', style({ transform: 'scale(0.5)', opacity: 0 }))
@@ -46,13 +47,29 @@ export class CellComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getSnakeStyle(): object {
+  getHeadStyle(): object {
     const snake = this.cell.entity as Snake
 
-    if (snake.isHead) {
-      return { 'background-color': '#0f640f' }
+    var transform: string = 'unset'
+    
+    switch(snake.directionCreated) {
+      case Direction.UP: transform = 'unset'; break
+      case Direction.RIGHT: transform = 'rotate(90deg)'; break
+      case Direction.DOWN: transform = 'rotate(180deg)'; break
+      case Direction.LEFT: transform = 'rotate(270deg)'; break
     }
-    return { 'background-color': '#00BE00' }
+
+    return {
+      'transform': transform
+    }
+  }
+
+  isHead(): boolean {
+    if(this.cell.entity && this.cell.entity.type == EntityType.SNAKE) {
+      const snake: Snake = this.cell.entity as Snake
+      return snake.isHead
+    }
+    return false
   }
 
   getAnimTrigger(): number {

@@ -39,6 +39,8 @@ export class Level implements ProgressHandler {
             this.turns = this.turns + 1
             this.game.turn(this.getNextEvent(this.game.points))
 
+            // this.isPlaying = false
+
             if (this.isPlaying) {
                 this.loop()
             }

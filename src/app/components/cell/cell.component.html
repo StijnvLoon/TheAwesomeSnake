@@ -1,12 +1,23 @@
 <div class="cell" (click)="log()">
-    <div *ngIf="cell.entity && cell.entity.type == 0" class="entity ant" [@snakeAnim] [ngStyle]="getSnakeStyle()"
-        [class.anim_apple_eat]="getAnimTrigger() == 0"></div>
 
+    <!-- snake body -->
+    <div *ngIf="cell.entity && cell.entity.type == 0 && !isHead()" class="entity snake_body" [@snakeAnim]
+        [class.anim_apple_eat]="getAnimTrigger() == 0">
+    </div>
+
+    <!-- snake head -->
+    <div *ngIf="cell.entity && cell.entity.type == 0 && isHead()" class="entity snake_head" [ngStyle]="getHeadStyle()">
+        <img src=".../../../../../assets/Head.png">
+    </div>
+
+    <!-- apple -->
     <div *ngIf="cell.entity && cell.entity.type == 1" class="entity apple" [@appleAnim]>
         <img style="height: inherit; transform: scale(0.95);" src="../../../assets/Apple_logo_red.svg">
     </div>
 
+    <!-- blockade -->
     <div *ngIf="cell.entity && cell.entity.type == 2" class="entity blockade"></div>
-    
+
+    <!-- board -->
     <div *ngIf="cell.showBoard" [@boardAnim] class="board"></div>
 </div>

@@ -29,7 +29,7 @@ export class Game {
 
     createSnake(targetCell: Cell) {
         //make snake object with listener
-        const snake: Snake = new Snake(this.points)
+        const snake: Snake = new Snake(this.points, this.direction)
         snake.entityListener = {
             onKilled: () => {
                 const index: number = this.snakes.indexOf(snake)

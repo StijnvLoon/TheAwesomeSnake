@@ -21,4 +21,8 @@
         Level 3
         <div class="menu_button_line"></div>
     </div>
+    <div class="menu_button" (click)="start(chaos)" [class.menu_button_disabled]="progressService.progress < 3">
+        Eind Baas
+        <div class="menu_button_line"></div>
+    </div>
 </div>
