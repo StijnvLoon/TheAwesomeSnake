@@ -13,43 +13,12 @@ import { ProgressService } from './services/progress.service';
 })
 export class AppComponent implements LevelListener {
 
-  classic: Level = new Level(
-    20,
-    1,
-    700,
-    15,
-    new Map(),
-    this
-  )
-  fast: Level = new Level(
-    100,
-    10,
-    700,
-    20,
-    new Map(),
-    this
-  )
-  chaos: Level = new Level(
-    100,
-    3,
-    700,
-    15,
-    new Map([
-      [5, new GridAnimEvent(GridAnim.ROTATE180, 3000)],
-      [7, new GridAnimEvent(GridAnim.DEFAULT, 3000)],
-      [50, new GridAnimEvent(GridAnim.INVERT_COLORS, 1000)],
-      [65, new GridAnimEvent(GridAnim.GOLEFT, 3000)],
-      [75, new GridAnimEvent(GridAnim.DEFAULT, 1500)],
-    ]),
-    this
-  )
-
   level: Level
 
   constructor(public progressService: ProgressService) { }
 
-  start(level: Level) {
-    this.level = level
+  start(level: number) {
+    this.level = this.getLevel(level)
     this.level.game.countdown(() => {
       this.level.start()
     })
@@ -58,7 +27,7 @@ export class AppComponent implements LevelListener {
   onLevelEnded(won: boolean, points: number) {
     this.level = undefined
 
-    if(won) {
+    if (won) {
       this.progressService.increaseProgress()
     }
   }
@@ -94,13 +63,64 @@ export class AppComponent implements LevelListener {
         break
       }
       case 32: {
-        if(this.level.isPlaying) {
+        if (this.level.isPlaying) {
           this.level.pause()
         } else {
           this.level.start()
         }
         break
       }
+    }
+  }
+
+  getLevel(number: number): Level {
+    switch (number) {
+      case 1: return new Level(
+        20,
+        1,
+        700,
+        15,
+        new Map(),
+        this
+      )
+      case 2: return new Level(
+        100,
+        10,
+        300,
+        0,
+        new Map(),
+        this
+      )
+      case 3: return new Level(
+        20,
+        1,
+        700,
+        15,
+        new Map([
+          [5, new GridAnimEvent(GridAnim.INVERT_COLORS, 1000)],
+          [15, new GridAnimEvent(GridAnim.DEFAULT, 1000)],
+        ]),
+        this,
+      )
+      case 4: return new Level(
+        60,
+        3,
+        600,
+        10,
+        new Map([
+          [5, new GridAnimEvent(GridAnim.GOLEFT, 1500)],
+          [10, new GridAnimEvent(GridAnim.GORIGHT, 3000)],
+          [13, new GridAnimEvent(GridAnim.DEFAULT, 3000)],
+          [18, new GridAnimEvent(GridAnim.SHRINK, 3000)],
+          [25, new GridAnimEvent(GridAnim.ROTATE180, 3000)],
+          [30, new GridAnimEvent(GridAnim.DEFAULT, 3000)],
+          [38, new GridAnimEvent(GridAnim.FADE, 1500)],
+          [42, new GridAnimEvent(GridAnim.DEFAULT, 3000)],
+          [48, new GridAnimEvent(GridAnim.BLUR, 1500)],
+          [55, new GridAnimEvent(GridAnim.DEFAULT, 1500)],
+        ]),
+        this
+      )
     }
   }
 }

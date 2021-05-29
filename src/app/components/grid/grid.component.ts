@@ -37,7 +37,7 @@ export class GridComponent implements OnInit {
         case GridAnim.SHRINK: {
           return {
             'transition': 'all ' + animEvent.duration + 'ms cubic-bezier(0.68, -0.6, 0.32, 1.6)',
-            'transform': 'scale(0.6)'
+            'transform': 'scale(0.5)'
           }
         }
         case GridAnim.GOLEFT: {
@@ -52,6 +52,18 @@ export class GridComponent implements OnInit {
             'transform': 'translateX(25vw)'
           }
         }
+        case GridAnim.BLUR: {
+          return {
+            'transition': 'all ' + animEvent.duration + 'ms ease',
+            'filter': 'blur(20px)'
+          }
+        }
+        case GridAnim.FADE: {
+          return {
+            'transition': 'all ' + animEvent.duration + 'ms cubic-bezier(0.68, -0.6, 0.32, 1.6)',
+            'filter': 'opacity(0.1)'
+          }
+        }
         case GridAnim.DEFAULT: {
           return {
             'transition': 'all ' + animEvent.duration + 'ms cubic-bezier(0.68, -0.6, 0.32, 1.6)',
@@ -63,8 +75,5 @@ export class GridComponent implements OnInit {
     } else {
       return {}
     }
-    
-
   }
-
 }

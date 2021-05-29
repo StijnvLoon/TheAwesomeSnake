@@ -39,7 +39,7 @@
     height: 2px;
     width: 80%;
     background-color: black;
-    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: all 0.1s linear;
 }
 .menu_button_disabled {
     pointer-events: none;

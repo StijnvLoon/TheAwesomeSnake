@@ -144,5 +144,7 @@ export enum GridAnim {
     INVERT_COLORS,
     SHRINK,
     GOLEFT,
-    GORIGHT
+    GORIGHT,
+    FADE,
+    BLUR
 }
