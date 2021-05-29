@@ -14,7 +14,7 @@ import { ProgressService } from './services/progress.service';
 export class AppComponent implements LevelListener {
 
   classic: Level = new Level(
-    100,
+    20,
     1,
     700,
     15,
@@ -90,6 +90,14 @@ export class AppComponent implements LevelListener {
       case 40: {
         if (this.level.game.direction !== Direction.UP) {
           this.level.game.direction = Direction.DOWN
+        }
+        break
+      }
+      case 32: {
+        if(this.level.isPlaying) {
+          this.level.pause()
+        } else {
+          this.level.start()
         }
         break
       }

@@ -10,8 +10,8 @@ export class Level implements ProgressHandler {
     constructor(
         targetPoints: number,
         apples: number,
-        private startSpeed: number,
-        private speedDecreasePerPoint: number,
+        private startDelay: number,
+        private delayDecreasePerPoint: number,
         //on what turn the events takes place
         private eventsMap: Map<number, IEvent>,
         private listener: LevelListener
@@ -44,7 +44,7 @@ export class Level implements ProgressHandler {
             if (this.isPlaying) {
                 this.loop()
             }
-        }, this.game.calculateLoopSpeed(this.startSpeed, this.speedDecreasePerPoint))
+        }, this.game.calculateLoopDelay(this.startDelay, this.delayDecreasePerPoint))
     }
 
     private getNextEvent(points: number): IEvent {

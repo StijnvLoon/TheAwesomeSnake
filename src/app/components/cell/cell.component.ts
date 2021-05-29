@@ -51,21 +51,39 @@ export class CellComponent implements OnInit {
     const snake = this.cell.entity as Snake
 
     var transform: string = 'unset'
-    
-    switch(snake.directionCreated) {
-      case Direction.UP: transform = 'unset'; break
-      case Direction.RIGHT: transform = 'rotate(90deg)'; break
-      case Direction.DOWN: transform = 'rotate(180deg)'; break
-      case Direction.LEFT: transform = 'rotate(270deg)'; break
+    var margin: string = 'unset'
+
+    switch (snake.directionCreated) {
+      case Direction.UP: {
+        transform = 'unset'
+        margin = '2px 0px 0px 0px'
+        break
+      }
+      case Direction.RIGHT: {
+        transform = 'rotate(90deg)'
+        margin = '0px 2px 0px 0px'
+        break
+      }
+      case Direction.DOWN: {
+        transform = 'rotate(180deg)'
+        margin = '0px 0px 2px 0px'
+        break
+      }
+      case Direction.LEFT: {
+        transform = 'rotate(270deg)'
+        margin = '0px 0px 0px 2px'
+        break
+      }
     }
 
     return {
-      'transform': transform
+      'transform': transform,
+      'margin': margin
     }
   }
 
   isHead(): boolean {
-    if(this.cell.entity && this.cell.entity.type == EntityType.SNAKE) {
+    if (this.cell.entity && this.cell.entity.type == EntityType.SNAKE) {
       const snake: Snake = this.cell.entity as Snake
       return snake.isHead
     }

@@ -158,8 +158,15 @@ export class Game {
         this.progressHandler.finish(false, this.points)
     }
 
-    calculateLoopSpeed(startSpeed: number, speedDecreasePerPoint: number): number {
-        return startSpeed - (this.points * speedDecreasePerPoint)
+    calculateLoopDelay(startSpeed: number, speedDecreasePerPoint: number): number {
+
+        const calculatedSpeed: number = startSpeed - (this.points * speedDecreasePerPoint)
+        //200 = min delay
+        if(calculatedSpeed > 200) {
+            return calculatedSpeed
+        } else {
+            return 200
+        }
     }
 }
 
