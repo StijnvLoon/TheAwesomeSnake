@@ -25,11 +25,11 @@ export class AppComponent implements LevelListener {
   }
 
   onLevelEnded(won: boolean, points: number) {
-    this.level = undefined
-
     if (won) {
-      this.progressService.increaseProgress()
+      this.progressService.increaseProgress(this.level.indicator)
     }
+
+    this.level = undefined
   }
 
   @HostListener('window:keydown', ['$event'])
@@ -62,20 +62,21 @@ export class AppComponent implements LevelListener {
         }
         break
       }
-      case 32: {
-        if (this.level.isPlaying) {
-          this.level.pause()
-        } else {
-          this.level.start()
-        }
-        break
-      }
+      // case 32: {
+      //   if (this.level.isPlaying) {
+      //     this.level.pause()
+      //   } else {
+      //     this.level.start()
+      //   }
+      //   break
+      // }
     }
   }
 
   getLevel(number: number): Level {
     switch (number) {
       case 1: return new Level(
+        1,
         20,
         1,
         700,
@@ -84,6 +85,7 @@ export class AppComponent implements LevelListener {
         this
       )
       case 2: return new Level(
+        2,
         100,
         10,
         300,
@@ -92,6 +94,7 @@ export class AppComponent implements LevelListener {
         this
       )
       case 3: return new Level(
+        3,
         20,
         1,
         700,
@@ -103,6 +106,7 @@ export class AppComponent implements LevelListener {
         this,
       )
       case 4: return new Level(
+        4,
         60,
         3,
         600,

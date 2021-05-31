@@ -13,7 +13,7 @@ import { CellComponent } from './components/cell/cell.component';
   declarations: [
     AppComponent,
     GridComponent,
-    CellComponent
+    CellComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Cell } from 'src/model/Cell';
+import { Snake } from 'src/model/entities/Snake';
+import { EntityType } from 'src/model/Entity';
 import { GridAnimEvent } from 'src/model/Event';
 import { Grid, GridAnim } from 'src/model/Grid';
 
@@ -75,5 +78,18 @@ export class GridComponent implements OnInit {
     } else {
       return {}
     }
+  }
+
+  hashead(cell: Cell): boolean {
+    if(cell.entity) {
+      if(cell.entity.type == EntityType.SNAKE) {
+        const snake: Snake = cell.entity as Snake
+
+        if(snake.isHead) {
+          return true
+        }
+      }
+    }
+    return false
   }
 }

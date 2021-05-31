@@ -8,6 +8,7 @@ export class Level implements ProgressHandler {
     public game: Game
 
     constructor(
+        public indicator,
         targetPoints: number,
         apples: number,
         private startDelay: number,
