@@ -98,7 +98,7 @@ export class AppComponent implements LevelListener {
         20,
         1,
         700,
-        15,
+        25,
         new Map([
           [5, new GridAnimEvent(GridAnim.INVERT_COLORS, 1000)],
           [15, new GridAnimEvent(GridAnim.DEFAULT, 1000)],
@@ -113,7 +113,7 @@ export class AppComponent implements LevelListener {
         10,
         new Map([
           [5, new GridAnimEvent(GridAnim.GOLEFT, 1500)],
-          [10, new GridAnimEvent(GridAnim.GORIGHT, 3000)],
+          [10, new GridAnimEvent(GridAnim.GORIGHT, 2000)],
           [13, new GridAnimEvent(GridAnim.DEFAULT, 3000)],
           [18, new GridAnimEvent(GridAnim.SHRINK, 3000)],
           [25, new GridAnimEvent(GridAnim.ROTATE180, 3000)],

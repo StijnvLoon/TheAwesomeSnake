@@ -57,21 +57,22 @@ export class GridComponent implements OnInit {
         }
         case GridAnim.BLUR: {
           return {
-            'transition': 'all ' + animEvent.duration + 'ms ease',
+            'transition': 'all ' + animEvent.duration + 'ms cubic-bezier(0.68, -0.6, 0.32, 1.6)',
             'filter': 'blur(20px)'
           }
         }
         case GridAnim.FADE: {
           return {
             'transition': 'all ' + animEvent.duration + 'ms cubic-bezier(0.68, -0.6, 0.32, 1.6)',
-            'filter': 'opacity(0.1)'
+            'opacity': '0.1'
           }
         }
         case GridAnim.DEFAULT: {
           return {
             'transition': 'all ' + animEvent.duration + 'ms cubic-bezier(0.68, -0.6, 0.32, 1.6)',
-            'transform': 'rotate(0deg) translateX(0) scale(1)',
-            'filter': 'invert(0)'
+            'transform': 'unset',
+            'filter': 'unset',
+            'opacity': 'unset',
           }
         }
       }
