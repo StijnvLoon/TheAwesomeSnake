@@ -17,12 +17,12 @@
 .snake_body {
     background-color: #00BE00;
 }
-// .snake_head {
-//     background-color: #339b33;
-//     border-radius: 50% 50% 0px 0px;
-// }
+.snake_head {
+    background-color: #339b33;
+    border-radius: 50% 50% 0px 0px;
+}
 .snake_head img {
-    height: 200%;
+    height: 110%;
 }
 .anim_apple_eat {
     animation: apple_eaten 0.8s linear 0s 1;

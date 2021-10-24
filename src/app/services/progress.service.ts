@@ -20,10 +20,11 @@ export class ProgressService {
   }
 
   increaseProgress(indicator: number) {
-    if(this.progress < indicator) {
-      this.progress = indicator
-      localStorage.setItem(this.progressStorage, this.progress + "")
+    if(indicator > 0) {
+      if(this.progress < indicator) {
+        this.progress = indicator
+        localStorage.setItem(this.progressStorage, this.progress + "")
+      }
     }
   }
-
 }

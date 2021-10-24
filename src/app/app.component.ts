@@ -5,6 +5,8 @@ import { Level } from 'src/model/Level';
 import { Direction, Game } from '../model/Game';
 import { GridAnimEvent } from '../model/Event';
 import { ProgressService } from './services/progress.service';
+import { MatDialog } from '@angular/material/dialog';
+import { LevelCreatorDialog } from './dialogs/level-creator/level-creator.dialog';
 
 @Component({
   selector: 'app-root',
@@ -15,10 +17,10 @@ export class AppComponent implements LevelListener {
 
   level: Level
 
-  constructor(public progressService: ProgressService) { }
+  constructor(public progressService: ProgressService, private dialog: MatDialog) { }
 
-  start(level: number) {
-    this.level = this.getLevel(level)
+  start(level: Level) {
+    this.level = level
     this.level.game.countdown(() => {
       this.level.start()
     })
@@ -30,6 +32,19 @@ export class AppComponent implements LevelListener {
     }
 
     this.level = undefined
+  }
+
+  showLevelCreatorDialog() {
+    const dialogRef = this.dialog.open(LevelCreatorDialog, {
+      width: '60%',
+      data: { levelListener: this }
+    })
+
+    dialogRef.afterClosed().subscribe(async level => {
+      if(level) {
+        this.start(level)
+      }
+    })
   }
 
   @HostListener('window:keydown', ['$event'])
@@ -62,14 +77,14 @@ export class AppComponent implements LevelListener {
         }
         break
       }
-      // case 32: {
-      //   if (this.level.isPlaying) {
-      //     this.level.pause()
-      //   } else {
-      //     this.level.start()
-      //   }
-      //   break
-      // }
+      case 32: {
+        if (this.level.isPlaying) {
+          this.level.pause()
+        } else {
+          this.level.start()
+        }
+        break
+      }
     }
   }
 

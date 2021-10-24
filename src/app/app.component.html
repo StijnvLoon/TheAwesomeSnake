@@ -10,25 +10,25 @@
 
 <div class="menu" *ngIf="!level">
     <div class="buttons_holder">
-        <div class="menu_button" (click)="start(1)">
+        <div class="menu_button" (click)="start(getLevel(1))">
             Level 1
             <div class="menu_button_line"></div>
         </div>
-        <div class="menu_button" (click)="start(2)" [class.menu_button_disabled]="progressService.progress < 1">
+        <div class="menu_button" (click)="start(getLevel(2))" [class.menu_button_disabled]="progressService.progress < 1">
             Level 2
             <div class="menu_button_line"></div>
         </div>
-        <div class="menu_button" (click)="start(3)" [class.menu_button_disabled]="progressService.progress < 2">
+        <div class="menu_button" (click)="start(getLevel(3))" [class.menu_button_disabled]="progressService.progress < 2">
             Level 3
             <div class="menu_button_line"></div>
         </div>
-        <div class="menu_button" (click)="start(4)" [class.menu_button_disabled]="progressService.progress < 3">
-            Eind Baas
+        <div class="menu_button" (click)="start(getLevel(4))" [class.menu_button_disabled]="progressService.progress < 3">
+            Boss
             <div class="menu_button_line"></div>
         </div>
-    </div>
-
-    <div class="price" *ngIf="progressService.progress == 4">
-        Gefeliciteerd! U bent gemachtigd het cadeau te openen.
+        <div class="menu_button" (click)="showLevelCreatorDialog()">
+            Custom
+            <div class="menu_button_line"></div>
+        </div>
     </div>
 </div>

@@ -7,14 +7,12 @@
 
     <!-- snake head -->
     <div *ngIf="cell.entity && cell.entity.type == 0 && isHead()" class="entity snake_head" [ngStyle]="getHeadStyle()">
-        <!-- <img src=".../../../../../assets/Head.png"> -->
-        <img src=".../../../../../assets/DJ.png">
+        <img src=".../../../../../assets/Head.png">
     </div>
 
     <!-- apple -->
     <div *ngIf="cell.entity && cell.entity.type == 1" class="entity apple" [@appleAnim]>
-        <!-- <img style="height: inherit; transform: scale(0.95);" src="../../../assets/Apple_logo_red.svg"> -->
-        <img style="height: 94%;" src="../../../assets/Pizza.png">
+        <img style="height: inherit; transform: scale(0.95);" src="../../../assets/Apple_logo_red.svg">
     </div>
 
     <!-- blockade -->

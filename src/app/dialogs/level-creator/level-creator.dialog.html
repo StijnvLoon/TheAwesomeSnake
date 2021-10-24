@@ -1,0 +1,61 @@
+<div class="dialog_container">
+
+    <div class="dialog_title">
+        <h1 mat-dialog-title>Create custom level</h1>
+    </div>
+
+    <div class="dialog_body">
+        <div class="dialog_form_section">
+            <mat-form-field class="dialog_form_section_object" appearance="fill">
+                <mat-label>Target points</mat-label>
+                <input type="number" max="1000" min="1" matInput [(ngModel)]="targetPoints">
+            </mat-form-field>
+
+            <mat-form-field class="dialog_form_section_object" appearance="fill">
+                <mat-label>Apples present</mat-label>
+                <input type="number" max="20" min="1" matInput [(ngModel)]="apples">
+            </mat-form-field>
+
+            <mat-form-field class="dialog_form_section_object" appearance="fill">
+                <mat-label>Initial speed (delay between updates, lower = faster)</mat-label>
+                <input type="number" max="1000" min="200" matInput [(ngModel)]="startDelay">
+            </mat-form-field>
+
+            <mat-form-field class="dialog_form_section_object" appearance="fill">
+                <mat-label>Speed increase per point</mat-label>
+                <input type="number" max="1000" min="0" matInput [(ngModel)]="delayDecreasePerPoint">
+            </mat-form-field>
+
+            <div>Events:</div>
+            <div class="event_holder" *ngFor="let event of events; let i = index">
+                <mat-form-field class="dialog_form_section_object" appearance="fill">
+                    <mat-label>Trigger on points</mat-label>
+                    <input type="number" [max]="targetPoints" min="1" matInput [(ngModel)]="event.triggerOnPoints">
+                </mat-form-field>
+
+                <mat-form-field class="dialog_form_section_object" appearance="fill">
+                    <mat-label>Animation</mat-label>
+                    <mat-select [(ngModel)]="event.animString">
+                        <mat-option *ngFor="let anim of getAnimations()" [value]="anim">{{anim}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="dialog_form_section_object" appearance="fill">
+                    <mat-label>Animation duration</mat-label>
+                    <input type="number" max="10000" min="1" matInput [(ngModel)]="event.duration">
+                </mat-form-field>
+            </div>
+
+            <button mat-stroked-button (click)="addEvent()">
+                Add event
+            </button>
+        </div>
+    </div>
+
+    <div class="dialog_footer">
+        <div mat-dialog-actions>
+            <button mat-flat-button (click)="close()" color="primary" class="mat-elevation-z1">Back</button>
+            <button mat-flat-button (click)="submit()" color="accent" class="mat-elevation-z1">Play!</button>
+        </div>
+    </div>
+</div>
